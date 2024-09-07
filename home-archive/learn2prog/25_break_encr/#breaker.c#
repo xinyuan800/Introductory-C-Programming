@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include <ctype.h>
+
+void countFrequency(int* character,FILE* f){
+  int c;
+  while((c=fgetc(f))!=EOF){
+    if(isalpha(c)){
+      character[c-'a']++;
+    }
+  }
+  return;
+}
+
+int getKey(int *character){
+  int max=0;
+  for(int i=0;i<26;i++){
+    if(character[i]>max)
+      max = i;
+  }
+  return max;
+}
+
+int main(int argc,char ** argv){
+  if(argc!=2){
+    fprintf(stderr,"Usage: encrypt key inputFileName\n");
+    return EXIT_FAILURE; 
+  }
+  FILE * f = fopen(argv[1], "r");  
+  if (f == NULL) {    
+    perror("Could not open file");    
+    return EXIT_FAILURE;  
+  }
+  int character[26] = {0};
+  countFrequency(character,f);
+    printf("%d\n", getKey(character));
+  if (fclose(f) != 0) {    
+    perror("Failed to close the input file!");    
+    return EXIT_FAILURE;  
+  }  
+}

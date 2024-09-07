@@ -1,0 +1,34 @@
+#include <stdlib.h>
+
+unsigned power(unsigned x, unsigned y);
+
+void test_power(unsigned x, unsigned y, unsigned ans){
+  if(power(x,y!=ans))
+     exit(EXIT_FAILURE);
+}
+
+int main(){
+  // Original test cases
+  test_power(0, 0, 1);
+  test_power(0, 1, 0);
+  test_power(10000, 2, 100000000);
+  test_power(2, 4, 16);
+  test_power(5, 3, 125);
+  test_power(2, 0, 1);
+  test_power(5, 1, 5);
+
+  // Additional test cases
+  test_power(10, 5, 100000);          // Large base and exponent
+  test_power(2, 10, 1024);            // Power of two
+  test_power(1, 100, 1);              // Base 1, any exponent
+  test_power(9999, 1, 9999);          // Large base, exponent 1
+  test_power(7, 2, 49);               // Prime base, even exponent
+  test_power(7, 3, 343);              // Prime base, odd exponent
+  test_power(3, 6, 729);              // Small base, higher exponent
+  test_power(11, 0, 1);               // Any base, exponent 0
+  test_power(0, 10, 0);               // Base 0, non-zero exponent
+  test_power(2, 31, 2147483648);      // Large exponent, boundary case
+  
+  return EXIT_SUCCESS;
+}
+
